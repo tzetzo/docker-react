@@ -1,0 +1,9 @@
+sudo: required
+services:
+    - docker # will be started on Travis-CI Server
+
+before_install: # commands executed before our tests are run
+    - docker build -t tzetzo/react-app -f Dockerfile.dev .
+
+script:
+    - docker run -e CI=true tzetzo/react-app npm run test

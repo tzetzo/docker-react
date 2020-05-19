@@ -1,0 +1,32 @@
+version: "3"
+
+# List the containers we want to start
+services:
+  # react app container
+  react-app:
+    # Image name "user/repo:tag"
+    image: tzetzo/react-app
+    build:
+        context: .
+        dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    # Bind Mount
+    # Changes in our React app code on our Host(./src) will be reflected in the React app running inside the Container on the Linux VM(/app):
+    volumes:
+      #- ./src:/app/src   # doesnt include package.json etc in root folder
+      - /app/node_modules # excludes this folder from the mounting
+      - .:/app
+  
+  # react tests container
+  react-app-tests:
+    image: tzetzo/react-app-tests
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    # overrides the CMD from Dockerfile.dev
+    command: ["npm", "run", "test"]
