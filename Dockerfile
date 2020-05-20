@@ -13,14 +13,12 @@ RUN npm run build
 # nginx is web server we use to host our static React app content
 FROM nginx
 
-# AWS ElasticBeanstalk looks at the following to expose the app to the outside world
+# AWS ElasticBeanstalk looks at the following to expose the app to the outside world; Heroku ignores it;
 EXPOSE 80
-
-# only when deploying to Heroku!
-COPY default.conf.template /etc/nginx/conf.d/default.conf.template
 
 # builder comes from Phase 1
 COPY --from=builder /app/build /usr/share/nginx/html
 
 # only when deploying to Heroku!
-# CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'
+COPY default.conf.template /etc/nginx/conf.d/default.conf.template
+CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'
