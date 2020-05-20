@@ -17,7 +17,7 @@ FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/*
 
 # AWS ElasticBeanstalk looks at the following to expose the app to the outside world
-EXPOSE $PORT
+EXPOSE 80
 # builder comes from Phase 1
 COPY --from=builder /app/build /usr/share/nginx/html
 # CMD --> starts nginx by default
