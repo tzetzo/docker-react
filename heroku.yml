@@ -1,6 +1,5 @@
 build:
   docker:
-    release:
-      dockerfile: Dockerfile
-      target: builder
     web: Dockerfile
+release:
+  image: registry.heroku.com/tzetzo-docker-react/web
