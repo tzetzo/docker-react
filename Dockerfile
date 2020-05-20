@@ -3,7 +3,7 @@
 
 # Phase 1 - temporary container to build our React app
 FROM node:alpine as builder
-# WORKDIR /app
+WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY ./ ./
@@ -17,7 +17,7 @@ FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/*
 
 # AWS ElasticBeanstalk looks at the following to expose the app to the outside world
-# EXPOSE 80
+EXPOSE $PORT
 # builder comes from Phase 1
-COPY --from=builder /build /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
 # CMD --> starts nginx by default
