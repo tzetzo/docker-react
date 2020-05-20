@@ -13,13 +13,13 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: $API_KEY
+    secure: "fjgzgL5y0BQbP8Pu4TESsQ9U8aAC2UkX8RL4na2i7k9emexiOuWaAK18XelFmCMwqzRqDFygFTK2O7E5sMbvSj4E4lf6zL8EnUM15QxTMe2F4w4G5UImvD8ER+k6wu9bcGeATojRpbJ0KbECwsWYZNy1Ykzim06/hvJS7FYxQ3E8266LCNBJn84OMo7mEyr4oqjVcfACKhLUUGsSSnksWX8+YpCntp63ALlgMM2QbPLrcsNgxiWcoZ+9e0KTFWypVBDdW4SWLS64SWGDcyBMukn/KhowC3DeACV6S496kA7KRDEz9TfF1f9RH80AzzYn1y0R5agOLSv97/7rgVKhWRZhAM2xd5TIYZnIYbL3dGnMgQSm1VCNB2ZkWziTO5F3LK3dNAcbDQs0BKo3K8YKKaeO63UcJfMYEucN7A9Pd+fUE7kpAH4TRS6OmM27EppzY8nQtZi+tNxD8lfCa/uEcGMTNmJQwhX1jufWi6oQLVz3HEYOaTkr66KSlTfwwRFTLL1dxb4t/1USk3h6Vvic99jHtHwgrSHBP6lM5FFQlSsniKUzeULAzMiGrcQhFmFteDAxByU4GuZtJ/fC5nDrF06lOBHqaWtd+EuDGGGfCvjTQrmSUR1OuITho01Rlww07PzVLepLzZbfsmYa+IGNsyDWXlxLiu+TSQ9Am+tG4ig="
   # the name of the app in heroku
   app: tzetzo-docker-react
   on:
     # repo name in github
     repo: tzetzo/docker-react
-
+    
 # Deployment to AWS ElasticBeanstalk after successful tests & only when Master Branch changed!
 # deploy:
 #     #edge: true #add this if you are getting a persistent missing bucket_name error with a failed build
