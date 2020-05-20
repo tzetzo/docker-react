@@ -9,6 +9,8 @@ RUN npm install
 COPY ./ ./
 RUN npm run build
 
+RUN npm install -g serve && serve -s build
+
 # Phase 2 - the final container will contain only the build folder with our built React app
 # nginx is web server we use to host our static React app content
 FROM node:alpine
