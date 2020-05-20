@@ -9,22 +9,7 @@ script:
   # tests will be run for every github branch!
   - docker run -e CI=true tzetzo/react-app npm run test
 
-# Deployment to Heroku after successful tests
-deploy:
-  skip_cleanup: true
-  provider: heroku
-  api_key:
-    secure: "ebenS1nQDpPcVvsyItY/UfqYPE/40we0H5qRWCFov1ZnevIaZX+LJYL5017pXjXOqthR4BXsLznBim1OKgtoo/4m8+HbGzmQm0PvVGRIed/EksGJ2KBCqLhtHLJOpQ2ZutPgyS+eMPrcnUNizZnAsEAbA5cZvhdS/VrxqqZtBzg6/TCbBzm/Cyu0xy7boYWDOjqbvixfT8id3VnFOnq0fHXULhT0og2CnKz4Uhd1PjzsXqnCQBFoOJDFiBxcomY1WHnHH6NI01bBAIUzOX8HZZ0lUh8aCtZgDKe3UYIOrW+9Mg6zFxjyGxVP1w4V9ruoCKxQY4WGB+HQLnNCMMH7jWKOuhV0d2fYgnaDzabZhO4BDd4rlkNsJXwXTnfLXJbL3BDztuCUB8SZy+x5sGI9srsuczSuvh0AXy6ilc69OEmvnwvfSm5Tq40GaIy/8XoebMTsgNYlZ5JNh5teuIF8YtjQkFA2MGkxVIPH9CsCM1B8DrtAG/nlrtAsWXZWZNB6dotVS5qygJmn503PJT9uem6kglP7rVZa3b64n08x9YYQlaKq5Bvb3fHmEaqzE7LLbviZPcC64n3baitmKFjzbrXAYMRPogrEFvSIgDmuOJWxuN61oBrnYv4L20akjjDoUYMaJlrTOsH+4Vni2VMqVlzvGGkqJb/yvsGCIFJqCpk="
-  # the name of the app in heroku
-  app: tzetzo-docker-react
-  on:
-    # repo name in github
-    repo: tzetzo/docker-react
-
-script:
-  - docker run -p $PORT:80 tzetzo/react-app npm run start
-
-# Deployment to AWS ElasticBeanstalk after successful tests & only when Master Branch changed!
+  # Deployment to AWS ElasticBeanstalk after successful tests & only when Master Branch changed!
 # deploy:
 #     #edge: true #add this if you are getting a persistent missing bucket_name error with a failed build
 #     provider: elasticbeanstalk
