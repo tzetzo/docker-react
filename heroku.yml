@@ -1,5 +1,9 @@
 build:
-    docker:
-      web: Dockerfile
-  run:
-    web: npm install -g serve && serve -s build
+  docker:
+    web: Dockerfile
+
+run:
+  worker: 
+    command: 
+        - npm install -g serve
+        - serve -s build
