@@ -18,7 +18,7 @@ EXPOSE 80
 
 # Heroku
 COPY default.conf.template /etc/nginx/conf.d/default.conf.template
-COPY nginx.conf /etc/nginx/nginx.conf
+# COPY nginx.conf /etc/nginx/nginx.conf
 
 # builder comes from Phase 1
 COPY --from=builder /app/build /usr/share/nginx/html
