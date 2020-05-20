@@ -11,9 +11,7 @@ script:
 
 # Deployment to Heroku after successful tests
 after_success:
-  - sudo docker login --username $HEROKU_DOCKER_USERNAME --password $HEROKU_AUTH_TOKEN registry.heroku.com
-  - sudo docker tag tzetzo/react-app registry.heroku.com/tzetzo-docker-react/web
-  - sudo docker push registry.heroku.com/tzetzo-docker-react/web; fi
+  - docker run -p $PORT:80 nginx:alpine
 
 # Deployment to Heroku after successful tests
 # deploy:
