@@ -2,10 +2,6 @@ sudo: required
 services:
   - docker # will be started on Travis-CI Server
 
-cache:
-  directories:
-    - node_modules # cache this dir to save time from installing dependancies next time when CI is fired
-
 before_install: # commands executed before our tests are run
   - docker build -t tzetzo/react-app -f Dockerfile.dev .
 
@@ -24,7 +20,7 @@ deploy:
     # repo name in github
     # repo: tzetzo/docker-react
     branch: master
-    
+
 # Deployment to AWS ElasticBeanstalk after successful tests & only when Master Branch changed!
 # deploy:
 #     #edge: true #add this if you are getting a persistent missing bucket_name error with a failed build
