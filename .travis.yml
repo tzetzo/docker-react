@@ -1,4 +1,3 @@
-language: node_js
 sudo: required
 services:
   - docker # will be started on Travis-CI Server
@@ -11,19 +10,25 @@ script:
   - docker run -e CI=true tzetzo/react-app npm run test
 
 # Deployment to Heroku after successful tests
-deploy:
-  skip_cleanup: true
-  provider: heroku
-  api_key:
-    secure: "S4mfVZdiu4OEl6+oQbXFLWdayBpImGAQVDZuuWpuNmO57LHrqratbNGZSgHxvyvT7aC9bisD/aruBvHCl5FHwctxjUlPMnNpFhQqNOE0zq9NemUs/637bxyQpU+zCM3W4LSrZ9gY8U26nojdWoS700hM88O+gUzEsZAJVlu6kpmFItOmGfu9FKStILbgw0IARb2iBjIscUmX7mX0rNGZv7h2hypBXAvaXLvsiMDOFbIrOLu2nbhx8mKGM6a1TttGQwqa5ofZIbeHXWXK/7f3DkcYwaWJ/hcps22Mmh235wS6I+weQMVNXdecEEsu0SmZ1TJyIOk76XG9SfA/ezOoMrWCVdtoJKDUBoARR8RDy33Mkq+33336D9QzxE98IVPncTe1M4dffrMDilU3tnEEry7K2omnhJ+G8jXJSdZR53qsimzQQPNxu/o/NPMDL/48vfbCOWb14ML/YrC7V8wdkoIXseq+bQ5xLvTyy4lvDAr9aXXVWEWblZsP3e4MxJQ2iqQ90+cgSbfz1pjc2fy5KZkT+hZ+wXCTDdrwoe8STU8RD42KogydWwNmrcWi2vFnhdUTbKwPzfW9WqkGiIczEpddPbj1kozQmg7355mB0r+uCthrjrVRtr0tJdZ1HaIZbXu/7ZMfoUEGZgwqdcYiKS5IHpLgCVUML5zrla8jKoM="
-  # the name of the app in heroku
-  app: tzetzo-docker-react
-  on:
-    # repo name in github
-    repo: tzetzo/docker-react
-    # branch: master
-  # after_deploy:
-  #   - docker run --publish $PORT:80 nginx:alpine
+after_success:
+  - sudo docker login --username $HEROKU_DOCKER_USERNAME --password $HEROKU_AUTH_TOKEN registry.heroku.com
+  - sudo docker tag tzetzo-docker-react:latest registry.heroku.com/tzetzo-docker-react
+  - if [ $TRAVIS_BRANCH == "master" ] && [ $TRAVIS_PULL_REQUEST = "false" ]; then sudo docker push registry.heroku.com/tzetzo-docker-react; fi
+
+# Deployment to Heroku after successful tests
+# deploy:
+#   skip_cleanup: true
+#   provider: heroku
+#   api_key:
+#     secure: "S4mfVZdiu4OEl6+oQbXFLWdayBpImGAQVDZuuWpuNmO57LHrqratbNGZSgHxvyvT7aC9bisD/aruBvHCl5FHwctxjUlPMnNpFhQqNOE0zq9NemUs/637bxyQpU+zCM3W4LSrZ9gY8U26nojdWoS700hM88O+gUzEsZAJVlu6kpmFItOmGfu9FKStILbgw0IARb2iBjIscUmX7mX0rNGZv7h2hypBXAvaXLvsiMDOFbIrOLu2nbhx8mKGM6a1TttGQwqa5ofZIbeHXWXK/7f3DkcYwaWJ/hcps22Mmh235wS6I+weQMVNXdecEEsu0SmZ1TJyIOk76XG9SfA/ezOoMrWCVdtoJKDUBoARR8RDy33Mkq+33336D9QzxE98IVPncTe1M4dffrMDilU3tnEEry7K2omnhJ+G8jXJSdZR53qsimzQQPNxu/o/NPMDL/48vfbCOWb14ML/YrC7V8wdkoIXseq+bQ5xLvTyy4lvDAr9aXXVWEWblZsP3e4MxJQ2iqQ90+cgSbfz1pjc2fy5KZkT+hZ+wXCTDdrwoe8STU8RD42KogydWwNmrcWi2vFnhdUTbKwPzfW9WqkGiIczEpddPbj1kozQmg7355mB0r+uCthrjrVRtr0tJdZ1HaIZbXu/7ZMfoUEGZgwqdcYiKS5IHpLgCVUML5zrla8jKoM="
+# the name of the app in heroku
+# app: tzetzo-docker-react
+# on:
+# repo name in github
+# repo: tzetzo/docker-react
+# branch: master
+# after_deploy:
+#   - docker run --publish $PORT:80 nginx:alpine
 
 # Deployment to AWS ElasticBeanstalk after successful tests & only when Master Branch changed!
 # deploy:
