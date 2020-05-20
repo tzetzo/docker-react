@@ -18,7 +18,8 @@ deploy:
   app: tzetzo-docker-react
   on:
     # repo name in github
-    repo: tzetzo/docker-react
+    # repo: tzetzo/docker-react
+    branch: master
     
 # Deployment to AWS ElasticBeanstalk after successful tests & only when Master Branch changed!
 # deploy:
