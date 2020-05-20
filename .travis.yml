@@ -12,8 +12,8 @@ script:
 # Deployment to Heroku after successful tests
 after_success:
   - sudo docker login --username $HEROKU_DOCKER_USERNAME --password $HEROKU_AUTH_TOKEN registry.heroku.com
-  - sudo docker tag tzetzo-docker-react:latest registry.heroku.com/tzetzo-docker-react/web
-  - if [ $TRAVIS_BRANCH == "master" ] && [ $TRAVIS_PULL_REQUEST = "false" ]; then sudo docker push registry.heroku.com/tzetzo-docker-react/web; fi
+  - sudo docker tag tzetzo/react-app registry.heroku.com/tzetzo-docker-react/web
+  - sudo docker push registry.heroku.com/tzetzo-docker-react/web; fi
 
 # Deployment to Heroku after successful tests
 # deploy:
