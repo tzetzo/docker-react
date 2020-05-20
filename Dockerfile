@@ -4,7 +4,7 @@
 # Phase 1 - temporary container to build our React app
 FROM node:alpine as builder
 WORKDIR /app
-COPY package*.json ./
+COPY package.json ./
 RUN npm install
 COPY ./ ./
 RUN npm run build
