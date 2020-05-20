@@ -14,7 +14,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # AWS ElasticBeanstalk looks at the following to expose the app to the outside world
-EXPOSE 80
+EXPOSE process.env.PORT
 
 # builder comes from Phase 1
 COPY --from=builder /app/build /usr/share/nginx/html
