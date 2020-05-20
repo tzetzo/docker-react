@@ -11,7 +11,7 @@ RUN npm run build
 
 # Phase 2 - the final container will contain only the build folder with our built React app
 # nginx is web server we use to host our static React app content
-FROM node:alpine
+FROM nginx
 # AWS ElasticBeanstalk looks at the following to expose the app to the outside world
 EXPOSE 80
 # builder comes from Phase 1
