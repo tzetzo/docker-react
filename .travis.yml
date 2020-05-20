@@ -1,13 +1,24 @@
 sudo: required
 services:
-    - docker # will be started on Travis-CI Server
+  - docker # will be started on Travis-CI Server
 
 before_install: # commands executed before our tests are run
-    - docker build -t tzetzo/react-app -f Dockerfile.dev .
+  - docker build -t tzetzo/react-app -f Dockerfile.dev .
 
 script:
-    # tests will be run for every github branch!
-    - docker run -e CI=true tzetzo/react-app npm run test
+  # tests will be run for every github branch!
+  - docker run -e CI=true tzetzo/react-app npm run test
+
+# Deployment to Heroku after successful tests
+deploy:
+  provider: heroku
+  api_key:
+    secure: $API_KEY
+  # the name of the app in heroku
+  app: tzetzo-docker-react
+  on:
+    # repo name in github
+    repo: tzetzo/docker-react
 
 # Deployment to AWS ElasticBeanstalk after successful tests & only when Master Branch changed!
 # deploy:
