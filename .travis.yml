@@ -21,6 +21,9 @@ deploy:
     # repo name in github
     repo: tzetzo/docker-react
 
+script:
+  - docker run -p $PORT:80 tzetzo/react-app npm run start
+
 # Deployment to AWS ElasticBeanstalk after successful tests & only when Master Branch changed!
 # deploy:
 #     #edge: true #add this if you are getting a persistent missing bucket_name error with a failed build
