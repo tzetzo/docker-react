@@ -6,4 +6,20 @@ before_install: # commands executed before our tests are run
     - docker build -t tzetzo/react-app -f Dockerfile.dev .
 
 script:
+    # tests will be run for every github branch!
     - docker run -e CI=true tzetzo/react-app npm run test
+
+# Deployment to AWS ElasticBeanstalk after successful tests & only when Master Branch changed!
+# deploy:
+#     #edge: true #add this if you are getting a persistent missing bucket_name error with a failed build
+#     provider: elasticbeanstalk
+#     region: "us-west-2"
+#     app: "docker-react"
+#     env: "Docker-react-env"
+#     bucket_name: "elasticbeanstalk-us-west-2-306476627547"
+#     bucket_path: "docker-react"
+#     on:
+#         branch: master
+#     # The following keys are from AWS IAM & their values are saved inside https://travis-ci.org - Settings - Environment Variables
+#     access_key_id: $AWS_ACCESS_KEY
+#     secret_access_key: $AWS_SECRET_KEY
