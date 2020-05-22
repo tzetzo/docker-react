@@ -1,5 +1,5 @@
 # Production environment
-# AWS EBS used for prod deployment - it auto uses this file
+# AWS EBS or Heroku used for prod deployment - it auto uses this file
 
 # Phase 1 - temporary container to build our React app
 FROM node:alpine as builder
@@ -20,5 +20,5 @@ EXPOSE 80
 COPY --from=builder /app/build /usr/share/nginx/html
 
 # only when deploying to Heroku!
-COPY default.conf.template /etc/nginx/conf.d/default.conf.template
-CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'
