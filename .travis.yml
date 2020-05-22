@@ -1,5 +1,6 @@
 sudo: required
 services:
+  # specifies docker as a dependancy
   - docker # will be started on Travis-CI Server
 
 before_install: # commands executed before our tests are run
